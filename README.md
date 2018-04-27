@@ -1,2 +1,2 @@
-# my-todo
+# todo-manager
 Simple ToDo Application
