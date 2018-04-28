@@ -6,7 +6,7 @@
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
-var solution = File("./asset-manager.sln");
+var solution = File("./todo-manager.sln");
 
 
 ///////////////////////////////////////////////////////////////////////////////
