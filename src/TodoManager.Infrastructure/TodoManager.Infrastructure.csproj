@@ -78,10 +78,16 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Repository.cs" />
+    <Compile Include="Data\TodoContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Data\" />
+    <ProjectReference Include="..\TodoManager.Core\TodoManager.Core.csproj">
+      <Project>{A83D80F6-3C48-42CF-B403-8883E1071CF4}</Project>
+      <Name>TodoManager.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
