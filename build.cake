@@ -39,6 +39,7 @@ Task("Clean")
     );
 });
 
+
 Task("Restore")
 .Does(() => {
     DotNetCoreRestore();
@@ -92,7 +93,7 @@ Task("OpenCover")
             OldStyle = true,
             Register = "user"
         }
-        .WithFilter("+[AssetManager*]*"));
+        .WithFilter("+[TodoManager*]*"));
 
     }
 });
