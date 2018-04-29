@@ -86,9 +86,18 @@
   <ItemGroup>
     <Compile Include="Data\EfRepository.cs" />
     <Compile Include="Data\TodoContext.cs" />
+    <Compile Include="Migrations\201804291928441_Initial.cs" />
+    <Compile Include="Migrations\201804291928441_Initial.Designer.cs">
+      <DependentUpon>201804291928441_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804291928441_Initial.resx">
+      <DependentUpon>201804291928441_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TodoManager.Core\TodoManager.Core.csproj">
       <Project>{A83D80F6-3C48-42CF-B403-8883E1071CF4}</Project>

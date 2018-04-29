@@ -18,6 +18,10 @@ namespace TodoManager.Web.Controllers
         {
             this._repository = repository;
         }
+        public ToDoController()
+        {
+            _repository = new EfRepository<ToDoItem>();
+        }
 
         [HttpGet]
         public async Task<ActionResult> Index()
@@ -59,7 +63,7 @@ namespace TodoManager.Web.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet] 
         public ActionResult Edit(int id)
         {
             return View();

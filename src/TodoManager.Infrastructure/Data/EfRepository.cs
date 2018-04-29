@@ -10,6 +10,11 @@ namespace TodoManager.Infrastructure.Data
     {
         private readonly TodoContext _dbContext;
 
+        public EfRepository()
+        {
+            _dbContext = new TodoContext();
+        }
+
         public EfRepository(TodoContext dbContext)
         {
             this._dbContext = dbContext;
