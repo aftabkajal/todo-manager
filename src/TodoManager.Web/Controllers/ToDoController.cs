@@ -53,6 +53,7 @@ namespace TodoManager.Web.Controllers
 
         // POST: ToDo/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ToDoItem ToDoItem)
         {
             try
@@ -72,18 +73,23 @@ namespace TodoManager.Web.Controllers
         }
 
         [HttpGet] 
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            var toDoEntity = await _repository.GetByIdAsync(id);
+            return View(toDoEntity);
         }
 
         // POST: ToDo/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(int id, ToDoItem todoItem)
         {
             try
             {
-                // TODO: Add update logic here
+                if (id == todoItem.Id)
+                {
+                   await _repository.UpdateAsync(todoItem);
+                }
 
                 return RedirectToAction("Index");
             }
