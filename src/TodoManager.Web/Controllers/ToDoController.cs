@@ -76,6 +76,11 @@ namespace TodoManager.Web.Controllers
         public async Task<ActionResult> Edit(int id)
         {
             var toDoEntity = await _repository.GetByIdAsync(id);
+            if(toDoEntity == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(toDoEntity);
         }
 
@@ -99,21 +104,32 @@ namespace TodoManager.Web.Controllers
             }
         }
 
-        // GET: ToDo/Delete/5
-        public ActionResult Delete(int id)
+        [HttpGet]
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            var entity = await _repository.GetByIdAsync(id);
+
+            if(entity == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(entity);
         }
 
         // POST: ToDo/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id, ToDoItem entity)
         {
             try
             {
-                // TODO: Add delete logic here
+                if(id == entity.Id)
+                {
+                   await _repository.DeleteAsync(entity);
+                }
 
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             catch
             {

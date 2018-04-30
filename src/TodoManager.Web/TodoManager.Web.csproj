@@ -208,6 +208,7 @@
     <Content Include="Views\ToDo\Index.cshtml" />
     <Content Include="Views\ToDo\Details.cshtml" />
     <Content Include="Views\ToDo\Edit.cshtml" />
+    <Content Include="Views\ToDo\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
