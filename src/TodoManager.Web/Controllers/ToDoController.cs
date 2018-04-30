@@ -10,9 +10,12 @@ using TodoManager.Infrastructure.Data;
 
 namespace TodoManager.Web.Controllers
 {
+
+    [HandleError]
     public class ToDoController : Controller
     {
         private IAsyncRepository<ToDoItem> _repository;
+
         
         public ToDoController(IAsyncRepository<ToDoItem> repository)
         {
@@ -30,10 +33,15 @@ namespace TodoManager.Web.Controllers
             return View(toDoIteam);
         }
 
-        // GET: ToDo/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+         public async Task<ActionResult> Details(int id)
         {
-            return View();
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var todoItem = await _repository.GetByIdAsync(id);
+            return View(todoItem);
         }
 
         
