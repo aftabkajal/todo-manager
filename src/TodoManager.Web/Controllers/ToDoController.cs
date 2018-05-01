@@ -120,20 +120,20 @@ namespace TodoManager.Web.Controllers
         // POST: ToDo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id, ToDoItem entity)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
+            
             try
             {
-                if(id == entity.Id)
-                {
-                   await _repository.DeleteAsync(entity);
-                }
+                var entity = await _repository.GetByIdAsync(id);
+                  await _repository.DeleteAsync(entity);
+                
 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                return View(ex);
             }
         }
     }
