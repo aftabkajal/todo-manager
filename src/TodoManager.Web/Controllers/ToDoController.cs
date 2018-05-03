@@ -14,7 +14,7 @@ namespace TodoManager.Web.Controllers
     [HandleError]
     public class ToDoController : Controller
     {
-        private IAsyncRepository<ToDoItem> _repository;
+        private readonly IAsyncRepository<ToDoItem> _repository;
 
         
         public ToDoController(IAsyncRepository<ToDoItem> repository)
@@ -34,13 +34,17 @@ namespace TodoManager.Web.Controllers
         }
 
         [HttpGet]
-         public async Task<ActionResult> Details(int id)
+         public async Task<ActionResult> Details(int id = 0)
         {
-            if (id == null)
+            if (id == 0)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             var todoItem = await _repository.GetByIdAsync(id);
+            if(todoItem == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             return View(todoItem);
         }
 
@@ -73,8 +77,12 @@ namespace TodoManager.Web.Controllers
         }
 
         [HttpGet] 
-        public async Task<ActionResult> Edit(int id)
+        public async Task<ActionResult> Edit(int id = 0)
         {
+            if(id == 0)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             var toDoEntity = await _repository.GetByIdAsync(id);
             if(toDoEntity == null)
             {
@@ -105,8 +113,12 @@ namespace TodoManager.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int id = 0)
         {
+            if(id == 0)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             var entity = await _repository.GetByIdAsync(id);
 
             if(entity == null)
